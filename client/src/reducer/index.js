@@ -3,7 +3,7 @@ function rootReducer(){
         recipes : []
     }
     function rootReducer (state = initialState, action){
-        switch(action, type) {
+        switch(action.type) {
             case 'GET_RECIPES':
                 return {
                     ...state,

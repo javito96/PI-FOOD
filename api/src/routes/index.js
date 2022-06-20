@@ -60,7 +60,7 @@ router.get('/recipe', async (req, res) =>{
     let recipeTotal = await getAllRecipe();
     if(title){
         let recipeName = await recipeTotal.filter((e) => e.title.toLowerCase().includes(title.toLowerCase()))
-        recipeName.length ?
+        recipeName.length ?//!http://localhost:3001/recipe?title=brown+rice 
         res.status(200).send(recipeName):
         res.status(404).send('Receta no incluida, disculpa!!');
 
