@@ -2,20 +2,15 @@ import React from "react";
 // import s from './Cards.module.css';
 import { Link } from 'react-router-dom';
 
-export default function Cards({ id, image, title, diets }) {
-
+export default function Cards({ title, image, diets, id }) {
     return (
-        <div>
-            <div >
-                <div>
-                    <h4>{title}</h4>
-                    <img src={image} alt="img not found" />
-                    <p>Diets type: {diets.join(', ')}</p>
-                    <Link to={`/home/${id}`}>
-                        <h4>See more</h4>
-                    </Link>
-                </div>
-            </div>
-            </div>
-    )
-}
+      <div className="Card">
+        <h3>{title}</h3>
+        <h5>{diets}</h5>
+        <img src={image} alt="img not found" width="200px" heigth="250px" />
+        <Link to={"/detail/" + id}>
+          <button id="Detail">Detail</button>
+        </Link>
+     </div>
+    );
+  }

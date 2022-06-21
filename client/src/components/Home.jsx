@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {  useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import { getRecipes } from '../actions';
@@ -14,13 +14,13 @@ export default function Home (){
 
     useEffect (()=> {
         dispatch(getRecipes())//me trae las recetas
-    },[dispatch, pages, order, filtro])
+    },[dispatch])
 
     //*FUNCIONES
 
     function handleClick(e){
         e.preventDefault();
-        dispatch(getRecipes(pages, order, filtro));
+        dispatch(getRecipes());
     }
     // function handleSort (e) {
     //     e.preventDefault()
@@ -28,6 +28,8 @@ export default function Home (){
     //     setCurrentPage(1)
     //     setOrder(`${e.target.value}`)
     //   }
+
+
          
 
     return (
@@ -38,9 +40,31 @@ export default function Home (){
                 volver a cargar todas las recetas
             </button>
 
-            //FILTROS
             <div>
             
+            <select>
+          <option value=''>Filter Alphabetically</option>
+          <option value='a-z'>A-Z</option>
+          <option value='z-a'>Z-A</option>
+        </select>
+        <select>
+          <option value=''>Filter Score</option>
+          <option value='asc'>Max-Min</option>
+          <option value='des'>Min-Max</option>
+        </select> 
+
+        {
+           allRecipes?.map((c) => {
+            return(
+                <Fragment>
+                    <Link to={'/home' + c.id}>
+                        <Cards title={c.title} diets={c.diets} image={c.img} />
+                    </Link>
+                </Fragment>
+            )
+           })
+        }     
+         
         
             </div>          
         </div>
