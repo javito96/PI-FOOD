@@ -10,7 +10,11 @@ export function getRecipes(){
             payload: json.data
         })
     }
-}
+}//!toda la conexion del back con el front
 
-
-//!toda la conexion del back con el front
+export function filterRecipesByType(payload){
+    return {
+        type: 'FILTER-BY-TYPES',
+        payload
+    }
+}//* en action tratar siempre de tener la menor cantindad de logica posible
