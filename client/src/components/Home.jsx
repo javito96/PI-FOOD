@@ -56,11 +56,18 @@ export default function Home (){
         {
            allRecipes?.map((c) => {
             return(
-                <Fragment>
-                    <Link to={'/home' + c.id}>
-                        <Cards title={c.title} diets={c.diets} image={c.img} />
-                    </Link>
-                </Fragment>
+                <div key={c.id}>
+                    <Fragment>
+                        <Link to={'/home' + c.id}>
+                        <Cards 
+                        id={c.id} 
+                        key={c.id} 
+                        title={c.title}
+                        image={c.image} 
+                        diets={c.diets.length > 0? (c.diets.map(e=>e.name ? e.name : e)) : ['Diets not found']}/>
+                        </Link>
+                    </Fragment>
+                </div>
             )
            })
         }     

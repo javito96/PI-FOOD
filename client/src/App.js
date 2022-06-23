@@ -1,5 +1,5 @@
 import './App.css';
-import {BrowserRouter, Router, Switch} from 'react-router-dom'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import LandingPage from './components/LandingPage'
 import Home from './components/Home';
 
@@ -9,8 +9,8 @@ function App() {
     <BrowserRouter>
     <div className="App">
       <Switch>
-        <Router exact path= '/' component={LandingPage}/>
-        <Router path = '/home' component={Home}/>
+        <Route exact path='/' component={LandingPage}/>
+        <Route path ='/home' component={Home}/>
       </Switch>
     </div>
     </BrowserRouter>
