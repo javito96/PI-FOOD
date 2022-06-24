@@ -11,7 +11,7 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 const getApiInfo= async () => {
-    const apiUrl = await axios.get("https://api.spoonacular.com/recipes/complexSearch?apiKey=8b3b81aa6ed047b08e353cb828d81133&addRecipeInformation=true&number=10")
+    const apiUrl = await axios.get("https://api.spoonacular.com/recipes/complexSearch?apiKey=8b3b81aa6ed047b08e353cb828d81133&addRecipeInformation=true&number=50")
     const apiInfo = await apiUrl.data.results.map(e=> {
         return {
             title: e.title,

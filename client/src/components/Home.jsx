@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { useState, useEffect } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { getRecipes, filterRecipesByType } from '../actions';
+import { getRecipes, filterRecipesByType, orderByName, orderByScore } from '../actions';
 import {Link} from 'react-router-dom'
 import Cards from './Card'
 import Paginado from './Paginado';
@@ -17,6 +17,7 @@ export default function Home (){
     const indexOfLastRecipes = currentPage * recipesPerPage//numero del ultimo indice multiplicado pag, ej recetas 9 pag nro3 = 27
     const indexOfFirstRecipe = indexOfLastRecipes - recipesPerPage//indice de ultima receta - recetas por pag igual a indice de primer receta
     const currentRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipes) //slice toma una porcion de lo que yo le paso por parametro
+    const [ setOrder] = useState('')
   
 
     const paginado = (pageNumber) => {
@@ -34,15 +35,21 @@ export default function Home (){
         dispatch(getRecipes());
     }
     function handleFilterTypes(e){
-        dispatch(filterRecipesByType(e.target.value))
+        dispatch(filterRecipesByType(e.target.value))//target value es el paylou
         setCurrentPage(1)
       }
-    // function handleSort (e) {
-    //     e.preventDefault()
-    //     dispatch(orderByName(e.target.value))
-    //     setCurrentPage(1)
-    //     setOrder(`${e.target.value}`)
-    //   }
+    function handleSort (e) {
+        e.preventDefault()
+        dispatch(orderByName(e.target.value))
+        setCurrentPage(1)
+        setOrder(`${e.target.value}`)
+      }
+      function handleByScore(e){
+        e.preventDefault()
+        dispatch(orderByScore(e.target.value))
+        setCurrentPage(1)
+        setOrder(`${e.target.value}`)
+      }
 
 
          
@@ -57,13 +64,13 @@ export default function Home (){
 
             <div>
             
-            <select>
+            <select onChange={e=> handleSort(e)}>
           <option value=''>Filter Alphabetically</option>  
           <option value='a-z'>A-Z</option>
           <option value='z-a'>Z-A</option>
         </select>
 
-        <select>
+        <select onChange={e=> handleByScore(e)}>
           <option value=''>Filter Score</option>
           <option value='asc'>Max-Min</option>
           <option value='des'>Min-Max</option>

@@ -12,7 +12,17 @@
                     allRecipes: action.payload //*recarga la pagina una vez que se aplica el filtrado y queres buscar otra
                 }
 
-            case 'FILTER-BY-TYPES':
+
+                // case 'GET_NAME_RECIPES'   :
+                //  return{
+                //     ...state,
+                //     recipes: action.payload,
+                //     cargando:false,
+                //  }  
+                 
+                 
+
+            case 'FILTER_BY_TYPES':
                    
                         const allRecipes= state.allRecipes
                         const typesFiltered = action.payload === 'All' ? allRecipes : 
@@ -22,7 +32,48 @@
                         return {
                             ...state,
                             recipes: typesFiltered,
-                        }                      
+                        }
+
+
+            case 'ORDER_BY_NAME' :
+                const sortArr = action.payload === 'a-z' ?
+                state.recipes.sort(function (a,b){
+                    if(b.title> a.title) {
+                        return -1
+                    }else {
+                        return 0
+                    }                    
+                }) :
+                state.recipes.sort(function(a, b) {
+                    if(a.title > b.title) {
+                        return 1
+                    }else{
+                        return 0
+                    }
+                })
+                return{
+                    ...state,
+                    recipes: sortArr
+                }
+
+
+            case 'ORDER_BY_SCORE':
+                const sortArrayScore = action.payload === 'asc' ?
+                state.recipes.sort(function(a, b){
+                    if(a.healthScore < b.healthScore) return 1
+                    if(a.healthScore > b.healthScore) return -1
+                    return 0;
+                }) :
+                state.recipes.sort(function(a, b) {
+                    if(a.healthScore < b.healthScore) return -1
+                    if(a.healthScore > b.healthScore) return 1
+                    return 0;
+                });
+                return{
+                    ...state,
+                    recipes: sortArrayScore,
+                };
+                   
                    
                 default:
                     return state;
