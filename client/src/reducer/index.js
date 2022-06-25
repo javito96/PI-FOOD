@@ -13,12 +13,12 @@
                 }
 
 
-                // case 'GET_NAME_RECIPES'   :
-                //  return{
-                //     ...state,
-                //     recipes: action.payload,
-                //     cargando:false,
-                //  }  
+                case 'GET_NAME_RECIPES'   :
+                 return{
+                    ...state,
+                    recipes: action.payload,
+                    cargando:false,
+                 }  
                  
                  
 
@@ -36,20 +36,24 @@
 
 
             case 'ORDER_BY_NAME' :
-                const sortArr = action.payload === 'a-z' ?
-                state.recipes.sort(function (a,b){
-                    if(b.title> a.title) {
-                        return -1
-                    }else {
-                        return 0
-                    }                    
-                }) :
-                state.recipes.sort(function(a, b) {
+                const sortArr = action.payload === 'asc' ?
+                state.recipes.sort(function (a, b){
                     if(a.title > b.title) {
-                        return 1
-                    }else{
-                        return 0
+                        return 1;
                     }
+                    if (b.title > a.title){
+                        return -1;
+                    }    
+                    return 0;                
+                }) :
+                state.recipes.sort(function(a, b) {  //de forma descendente
+                    if(a.title > b.title) {
+                        return -1;
+                    }
+                    if (b.title > a.title){
+                        return 1
+                    }
+                    return 0;
                 })
                 return{
                     ...state,
@@ -60,13 +64,20 @@
             case 'ORDER_BY_SCORE':
                 const sortArrayScore = action.payload === 'asc' ?
                 state.recipes.sort(function(a, b){
-                    if(a.healthScore < b.healthScore) return 1
-                    if(a.healthScore > b.healthScore) return -1
-                    return 0;
+                if(a.healtScore > b.healtScore) {
+                        return 1;
+                    }if (b.healthScore > a.healthScore){
+                        return -1;
+                    }    
+                    return 0;                
                 }) :
                 state.recipes.sort(function(a, b) {
-                    if(a.healthScore < b.healthScore) return -1
-                    if(a.healthScore > b.healthScore) return 1
+                    if(a.healthScore > b.healthScore) {
+                        return -1;
+                    }
+                    if (b.healthScore > a.healthScore){
+                        return 1
+                    }
                     return 0;
                 });
                 return{

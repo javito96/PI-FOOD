@@ -5,6 +5,7 @@ import { getRecipes, filterRecipesByType, orderByName, orderByScore } from '../a
 import {Link} from 'react-router-dom'
 import Cards from './Card'
 import Paginado from './Paginado';
+import SearchBar from './SearchBar';
 
 
 
@@ -17,7 +18,7 @@ export default function Home (){
     const indexOfLastRecipes = currentPage * recipesPerPage//numero del ultimo indice multiplicado pag, ej recetas 9 pag nro3 = 27
     const indexOfFirstRecipe = indexOfLastRecipes - recipesPerPage//indice de ultima receta - recetas por pag igual a indice de primer receta
     const currentRecipes = allRecipes.slice(indexOfFirstRecipe, indexOfLastRecipes) //slice toma una porcion de lo que yo le paso por parametro
-    const [ setOrder] = useState('')
+    const [Ordenado, setOrder] = useState('')
   
 
     const paginado = (pageNumber) => {
@@ -42,13 +43,13 @@ export default function Home (){
         e.preventDefault()
         dispatch(orderByName(e.target.value))
         setCurrentPage(1)
-        setOrder(`${e.target.value}`)
+        setOrder(`Ordenado ${e.target.value}`)
       }
       function handleByScore(e){
         e.preventDefault()
         dispatch(orderByScore(e.target.value))
         setCurrentPage(1)
-        setOrder(`${e.target.value}`)
+        setOrder(`Ordenado ${e.target.value}`)
       }
 
 
@@ -66,14 +67,14 @@ export default function Home (){
             
             <select onChange={e=> handleSort(e)}>
           <option value=''>Filter Alphabetically</option>  
-          <option value='a-z'>A-Z</option>
-          <option value='z-a'>Z-A</option>
+          <option value='asc'>A-Z</option>
+          <option value='desc'>Z-A</option>
         </select>
 
         <select onChange={e=> handleByScore(e)}>
           <option value=''>Filter Score</option>
           <option value='asc'>Max-Min</option>
-          <option value='des'>Min-Max</option>
+          <option value='desc'>Min-Max</option>
         </select> 
 
         <select onChange={e => handleFilterTypes(e)} className='homeButton'>
@@ -99,6 +100,8 @@ export default function Home (){
         allRecipes={allRecipes.length}
         paginado={paginado}
         />
+
+        <SearchBar/>
         
 
         {
