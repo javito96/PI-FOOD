@@ -11,17 +11,30 @@ export function getRecipes(){
         })
     }
 }//!toda la conexion del back con el front
-export function getNameRecipes(title){
-    return async function (dispatch){
-        try{
-            let response = await axios.get(`http://localhost:3001/recipes?title=${title}`)
-            return dispatch({
-                type: 'GET_NAME_RECIPES',
-                payload: response.data
-            })
-        }catch(error) {
-            console.log(error);
-        }
+export function getRecipesName(title) {
+    return async function (dispatch) {
+        let json = await axios.get('http://localhost:3001/recipe?title=' + title);
+        return dispatch({
+            type: 'GET_RECIPES_NAME',
+            payload: json.data
+        })
+    }
+};
+
+export function getDiets() {
+    return async function (dispatch) {
+        const info = await axios("http://localhost:3001/types", {
+
+        })
+        return dispatch({type: 'GET_DIETS', payload: info.data})
+    }
+}
+
+export function postRecipes(payload){
+    return async function () {
+        const response = await axios.post('http://localhost:3001/recipe', payload)
+        console.log(response)
+        return response;
     }
 }
 

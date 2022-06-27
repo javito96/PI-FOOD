@@ -2,6 +2,7 @@
     const initialState = {
         recipes : [],
         allRecipes : [],
+        diets: [],
     }
     function rootReducer(state = initialState, action){
         switch(action.type) {
@@ -13,12 +14,22 @@
                 }
 
 
-                case 'GET_NAME_RECIPES'   :
+                case 'GET_RECIPES_NAME'   :
                  return{
                     ...state,
                     recipes: action.payload,
-                    cargando:false,
-                 }  
+                    // cargando:false
+                 } 
+                 case "GET_DIETS" : 
+                 return {
+                     ...state,
+                     diets : action.payload
+                 } 
+
+            case 'POST_RECIPES':
+                return {
+                    ...state,
+                }
                  
                  
 

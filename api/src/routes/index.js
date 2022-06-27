@@ -8,10 +8,14 @@ const {Recipe, Diet} = require('../db');
 
 const router = Router();
 //https://api.spoonacular.com/recipes/complexSearch?apiKey=8b3b81aa6ed047b08e353cb828d81133&addRecipeInformation=true&number=100
+// 1397b3a234f84bb1bd0d195de222c67f  javitocornejo@gmail.com
+
+
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 const getApiInfo= async () => {
-    const apiUrl = await axios.get("https://api.spoonacular.com/recipes/complexSearch?apiKey=8b3b81aa6ed047b08e353cb828d81133&addRecipeInformation=true&number=100")
+    const apiUrl = await axios.get("https://api.spoonacular.com/recipes/complexSearch?apiKey=8b3b81aa6ed047b08e353cb828d81133&addRecipeInformation=true&number=10")
+    // const apiUrl = await axios.get("https://api.spoonacular.com/recipes/complexSearch?apiKey=1397b3a234f84bb1bd0d195de222c67f&addRecipeInformation=true&number=30")
     const apiInfo = await apiUrl.data.results.map(e=> {
         return {
             title: e.title,
