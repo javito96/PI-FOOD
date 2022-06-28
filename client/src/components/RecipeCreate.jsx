@@ -10,27 +10,28 @@ export default function RecipeCreate() {
     const history = useHistory();
     const diets = useSelector((state) => state.diets);
     // const [errors, setErrors] = useState({});
-
-const [input, setInput] = useState({
-          title: "",
-          summary: "",
-          image: "",
-          healthScore: "",
-          spoonacularScore: "",
-          steps: "",
-          diets: [],
-})//aca guarda el formulario
+  
+    const [input, setInput] = useState({
+      title: "",
+      summary: "",
+      image: "",
+      healthScore: "",
+      spoonacularScore: "",
+      steps: "",
+      diets: [],
+    });
 
 function handleChange(e){
     setInput({
         ...input,
         [e.target.name] : e.target.value
     })
+    console.log(input)
 }
 function handleSelect(e){
     setInput({
         ...input,
-        diet: [...input.diets,e.target.value]
+        diets: [...input.diets,e.target.value]
     })
 }
 
@@ -65,7 +66,9 @@ return (
                 <label>Title</label>
                 <input
                 type='text'
-                value= {input.title}
+                value= {`${input.title.charAt(0).toUpperCase()}${input.title.slice(
+                    1
+                  )}`}
                 name= 'title'
                 onChange={(e) => handleChange(e)}
                 />
@@ -127,13 +130,13 @@ return (
             </div>
             
             <select onChange={(e) => handleSelect(e)}>
-                {diets.map((diet) =>(
-                    <option value={diet.title}>{diet.title}</option>
+                {diets.map((diet,i) =>(
+                    <option key={i} value={diet.title}>{diet.title}</option>
                 ))}
             </select>
-
-            <button type="submit" >Create recipe</button>
-
+            <ul><li>{input.diets.map(el => el + ', ')} </li></ul>
+            
+             <button type="submit" >Create recipe</button>                
             
         </form>
     </div>
