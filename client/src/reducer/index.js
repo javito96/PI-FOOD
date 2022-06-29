@@ -3,6 +3,7 @@
         recipes : [],
         allRecipes : [],
         diets: [],
+        detail : [],
     }
     function rootReducer(state = initialState, action){
         switch(action.type) {
@@ -13,6 +14,12 @@
                     allRecipes: action.payload //*recarga la pagina una vez que se aplica el filtrado y queres buscar otra
                 }
 
+                case "GET_DETAILS" : 
+                return {
+                    ...state,
+                    detail : action.payload,
+                    // cargando: false,
+                }
 
                 case 'GET_RECIPES_NAME'   :
                  return{
