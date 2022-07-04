@@ -62,19 +62,13 @@ export function orderByScore(payload) {
     }
 }
 
-export function getDetail(id){
-    return async function(dispatch){
-        try{
-            var json= await axios.get('http://localhost:3001/recipe/' + id);
-            return dispatch({
-                type: 'GET_DETAILS',
-                payload: json.data
+export function getDetail(id) {
+    return async function(dispatch) {
+        dispatch({ type: "CARGANDO" });
+            let json = await axios.get("http://localhost:3001/recipe/" + id)
+            return dispatch ({
+                type: "GET_DETAIL",
+                payload : json.data
             })
-        } catch(error){
-            console.log(error)
-        }
+        } 
     }
-
-}
-
-

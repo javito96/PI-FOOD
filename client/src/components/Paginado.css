@@ -1,0 +1,39 @@
+.paginadoContainer {
+    margin: 6rem auto 0 auto;
+    display: flex;
+    gap: 2.5rem;
+    justify-content: center;
+    width: 50%;
+    border-radius: 4.5rem;
+    padding: 0.7rem 0;
+  }
+  
+  .li {
+    list-style: none;
+    cursor: pointer;
+    border-radius: 100%;
+    font-weight: bold;
+    padding: 0.8rem 0.8rem;
+    transition: all 0.25s;
+  }
+  
+  .li:hover {
+    transform: scale(1.1);
+  }
+  
+  .a {
+    padding: 1rem 1.3rem;
+    border-radius: 15px;
+  
+    background-color: #e5890a;
+    transition: all 0.25s;
+    color: #f8f8f8;
+    font-size: 1.1rem;
+  }
+  
+  .a:focus,
+  .a:hover,
+  .a:active {
+    color: #f8f8f8;
+    background-color: #d89b16;
+  }

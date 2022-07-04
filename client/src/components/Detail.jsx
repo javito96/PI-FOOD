@@ -1,79 +1,56 @@
 import React from "react";
-import {Link} from 'react-router-dom';
-import { useDispatch, useSelector} from 'react-redux'
-import {getDetail} from '../actions/index';
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import Loading from "../components/Loading";
+import { getDetail } from "../actions/index";
+import "./Detail.css";
 
-export default function Detail(props){
-  console.log(props)
-  const dispatch = useDispatch()
+
+export default function Detail() {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const myRecipe = useSelector((state) => state.detail);
+  console.log(myRecipe);
 
   useEffect(() => {
-    dispatch(getDetail(props.match.params.id))
-  },[dispatch])
-
-  const myRecipe = useSelector((state) => state.detail)
-
- 
-  
+    dispatch(getDetail(id));
+  }, [dispatch, id]);
 
   return (
-    <div>
-        {Object.keys(myRecipe).length > 0 ? (
-            <div>
-                <div >
-                    <Link to="/home">
-                        <button >⬅ TO BACK HOME</button>
-                    </Link>
-                </div>
-                <div >
-                    <h2>{myRecipe.title}</h2>
-                </div>
-                <div >
-                    <div  >
-                        <img  src={myRecipe.image} alt="img not found" />:
-                    </div>
-                    <div >
-                        <div >
-                            <h3>Score: {myRecipe.spoonacularScore ? myRecipe.spoonacularScore : 'score not found'}</h3>
-                        </div>
-                        <div>
-                            <h3>Health Score: {myRecipe.healthScore ? myRecipe.healthScore : 'health score not found'}</h3>
-                        </div>
-                        <div>
-                            <h3>Diets: </h3>
-                            <p>{myRecipe.diets.length > 0 ? (myRecipe.diets.map(e => e.name ? e.name + '/ ' : e + '/ ')) : 'diets not found'}</p>
-                        </div>
-                        <div>
-                            <h3>Dish types:</h3>
-                            <div>
-                                <p>{myRecipe.dishTypes ? myRecipe.dishTypes.map(e => e + '/ ') : 'dishTypes not found'}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <h3>Summary: </h3>
-                        <p></p>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <h3>Instructions:</h3>
-                        <p>{myRecipe.analyzedInstructions.length !== 0 ?
-                            (typeof myRecipe.analyzedInstructions === 'string' ? myRecipe.analyzedInstructions : myRecipe.analyzedInstructions.map(e =>
-                                e.map(e =>
-                                    e.number && e.step ? 'STEP ' + e.number + ': ' + e.step : myRecipe.analyzedInstructions
-                                ))) : 'Not found instruccions'}</p>
-                    </div>
-                </div>
-            </div>
-        ) : (
-            <Loading />
-        )
-        }
+    <div key={id.toString}>
+      {
+      myRecipe.length > 0 ? (
+        <div key={id.toString} className="global">
+          <h1> {myRecipe[0].title}</h1>
+          <img className="image" src={myRecipe[0]?.image} alt="img not found" />
+          <h2>{myRecipe[0].summary}</h2>
+          <div key={id.toString} dangerouslySetInnerHTML={{ __html: myRecipe[0]?.summary }} />
+          <h2>Score : {myRecipe[0]?.healthScore} </h2>
+         {/*  <h2>Spoonacular Score : {myRecipe[0]?.spoonacularScore}</h2> */}
+          {myRecipe[0]?.dishTypes ? (
+            <h2>Dish Types: {myRecipe[0]?.dishTypes.map((el) => el) + " "}</h2>
+          ) : (
+            ""
+          )}
+          <h2>
+            Diets:
+            {myRecipe[0]?.diets.map((el) =>
+              el.title ? el.title + " " : el + " "
+            )}{" "}
+          </h2>
+          <h2>Steps : </h2>
+          {myRecipe[0].createdInDb === true
+            ? myRecipe[0].steps
+            : myRecipe[0].steps.map((el, index) => (
+                <p>{`${index + 1}. ${el}`}</p>
+              ))}
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
+      <Link to="/home">
+        <button>Return</button>
+      </Link>
     </div>
-) 
+  );
 }

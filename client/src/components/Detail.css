@@ -1,0 +1,116 @@
+.btnContainer {
+    margin-top: 20px;
+}
+
+.btnHome {
+    background: rgb(247, 66, 102);
+    color: white;
+    height: 40px;
+    width: 160px;
+    border-color: rgb(247, 66, 102);
+    border-radius: 10px;
+}
+
+.btnHome:hover {
+    background: rgb(138, 95, 104);
+    border-color: rgb(138, 95, 104);
+}
+
+.section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.title {
+    background-color: rgba(51, 49, 50, 0.8);
+    color: white;
+    width: 750px;
+    margin-left: 20%;
+    border-radius: 20px;
+}
+
+.imagen {
+    width: 400px;
+    height: 300px;
+    justify-content: center;
+    margin-top: 10px;
+    border: 45px solid rgba(51, 49, 50, 0.8);
+    border-radius: 30px;
+
+}
+
+.score {
+    background-color: rgba(51, 49, 50, 0.8);
+    color: white;
+    border-radius: 20px;
+    width: 600px;
+}
+
+.healthScore {
+    background-color: rgba(51, 49, 50, 0.8);
+    color: white;
+    border-radius: 20px;
+    width: 600px;
+}
+
+.diets {
+    background-color: rgba(51, 49, 50, 0.8);
+    color: white;
+    border-radius: 20px;
+    width: 600px;
+    line-height: 25px;
+}
+
+.sectionTwo {
+    padding-top: 50px;
+}
+
+
+.dishTypes {
+    background-color: rgba(51, 49, 50, 0.8);
+    color: white;
+    list-style: none;
+    border-radius: 20px;
+    width: 600px;
+    line-height: 25px;
+
+}
+
+.summary {
+    background-color: rgba(51, 49, 50, 0.8);
+    color: white;
+    width: 1180px;
+    margin-left: 100px;
+    border-radius: 20px;
+
+}
+
+.summary a {
+    text-decoration: none;
+    color: rgb(247, 66, 102)
+}
+
+.instructions {
+    background-color: rgba(51, 49, 50, 0.8);
+    color: white;
+    width: 1180px;
+    margin-left: 100px;
+    border-radius: 20px;
+}
+
+.sangria {
+    width: 1000px;
+    margin-left: 85px;
+    padding-top: 1px;
+    padding-bottom: 10px;
+    margin-top: 30px;
+}
+
+.sangriaTwo {
+    width: 1000px;
+    margin-top: 30px;
+    margin-left: 85px;
+    padding-top: 1px;
+    padding-bottom: 10px;
+    margin-bottom: 30px
+}

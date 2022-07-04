@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom'
 import Cards from './Card'
 import Paginado from './Paginado';
 import SearchBar from './SearchBar';
+import './Home.css'
 
 
 
@@ -56,29 +57,47 @@ export default function Home (){
          
 
     return (
-        <div>
-            <Link to='/recipes'>Create recipe</Link>
-            <h1>Recipes</h1>
-            <button onClick={e => {handleClick(e)}}>
+      <div className='back'>
+            <h1 className='title' >
+                FOOD<span>RECIPES</span>
+              </h1>
+              
+           
+        <div className='filterContainer' >         
+            <nav>
+                      <Link to='/recipes' className='button' id='button' >Create recipe</Link>
+            </nav>
+
+               <div> <SearchBar/></div>
+             
+              </div>
+            <button className='button' id='button' onClick={e => {handleClick(e)}}>
                 volver a cargar todas las recetas
             </button>
-
-            <div>
-            
-            <select onChange={e=> handleSort(e)}>
-          <option value=''>Filter Alphabetically</option>  
+        
+            <div>            
+        <h1 className='backDescripcion'>FILTRAR</h1>
+              <div className='filterContainer' >
+            <select                         
+             onChange={e=> handleSort(e)}>
+          <option value=''>FILTER ALPHABETUCALLY</option>  
           <option value='asc'>A-Z</option>
           <option value='desc'>Z-A</option>
         </select>
+               
 
-        <select onChange={e=> handleByScore(e)}>
-          <option value=''>Filter Score</option>
+
+        <select 
+        onChange={e=> handleByScore(e)}>
+          <option value=''>FILTER BY SCORE</option>
           <option value='asc'>Max-Min</option>
           <option value='desc'>Min-Max</option>
         </select> 
+             
 
-        <select onChange={e => handleFilterTypes(e)} className='homeButton'>
-          <option value=''>Filter By Diets</option>
+
+        <select onChange={e => handleFilterTypes(e)} >
+          <option value=''>FILTER BY DIETS</option>
           <option value='All'>All</option>
           <option value='gluten free'>Gluten Free</option>
           <option value='dairy free'>Dairy Free</option>
@@ -92,22 +111,23 @@ export default function Home (){
           <option value='vegetarian'>Vegeterian</option>
           <option value='ketogenic'>Ketogenic</option>
         </select>
-
-
-
-        <Paginado
-        recipesPerPage={recipesPerPage}
-        allRecipes={allRecipes.length}
-        paginado={paginado}
-        />
-
-        <SearchBar/>
+        <div>
+          
+        </div>
+              </div>
         
 
+                  
+              
+
+        </div>        
+        <div className='cards' >
+
         {
-           currentRecipes?.map((c) => {
+          currentRecipes?.map((c) => {
             return(
-                <div key={c.id}>
+              <div
+              key={c.id}>
                     <Fragment>
                         <Link to={'/home' + c.id}>
                         <Cards 
@@ -119,12 +139,18 @@ export default function Home (){
                         </Link>
                     </Fragment>
                 </div>
-            )
-           })
-        }     
-         
-        
-            </div>          
+            ) 
+          } )
+        }           
+        </div> 
+        <div>
+        <Paginado
+        recipesPerPage={recipesPerPage}
+        allRecipes={allRecipes.length}
+        paginado={paginado}
+        />
         </div>
+        </div>
+      
     )
 }

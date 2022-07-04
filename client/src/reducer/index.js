@@ -4,6 +4,7 @@
         allRecipes : [],
         diets: [],
         detail : [],
+        cargando : false,
     }
     function rootReducer(state = initialState, action){
         switch(action.type) {
@@ -12,17 +13,11 @@
                     ...state,
                     recipes: action.payload,
                     allRecipes: action.payload //*recarga la pagina una vez que se aplica el filtrado y queres buscar otra
-                }
-
-                case "GET_DETAILS" : 
-                return {
-                    ...state,
-                    detail : action.payload,
-                    // cargando: false,
-                }
-
-                case 'GET_RECIPES_NAME'   :
-                 return{
+                          }
+                          
+                          
+                          case 'GET_RECIPES_NAME'   :
+                              return{
                     ...state,
                     recipes: action.payload,
                     // cargando:false
@@ -31,19 +26,19 @@
                  return {
                      ...state,
                      diets : action.payload
-                 } 
+                    } 
 
-            case 'POST_RECIPES':
-                return {
+                    case 'POST_RECIPES':
+                        return {
                     ...state,
                 }
-                 
+                
                  
 
-            case 'FILTER_BY_TYPES':
+                case 'FILTER_BY_TYPES':
                    
-                        const allRecipes= state.allRecipes
-                        const typesFiltered = action.payload === 'All' ? allRecipes : 
+                    const allRecipes= state.allRecipes
+                    const typesFiltered = action.payload === 'All' ? allRecipes : 
                         allRecipes.filter(el=>el.diets.includes(action.payload) || 
                         el.diets.map((el) => el.title).includes(action.payload))
 
@@ -51,8 +46,8 @@
                             ...state,
                             recipes: typesFiltered,
                         }
-
-
+                        
+                        
             case 'ORDER_BY_NAME' :
                 const sortArr = action.payload === 'asc' ?
                 state.recipes.sort(function (a, b){
@@ -78,11 +73,11 @@
                     recipes: sortArr
                 }
 
-
-            case 'ORDER_BY_SCORE':
-                const sortArrayScore = action.payload === 'asc' ?
+                
+                case 'ORDER_BY_SCORE':
+                    const sortArrayScore = action.payload === 'asc' ?
                 state.recipes.sort(function(a, b){
-                if(a.healtScore > b.healtScore) {
+                    if(a.healtScore > b.healtScore) {
                         return 1;
                     }if (b.healthScore > a.healthScore){
                         return -1;
@@ -102,12 +97,18 @@
                     ...state,
                     recipes: sortArrayScore,
                 };
-                   
-                   
+                
+                case "GET_DETAIL" : 
+                return {
+                   ...state,
+                   detail : action.payload,
+                     cargando: false,
+                };
+                
                 default:
                     return state;
-        }
+                }
     }
 
 
-export default rootReducer;
+    export default rootReducer;
