@@ -7,6 +7,7 @@ import Cards from './Card'
 import Paginado from './Paginado';
 import SearchBar from './SearchBar';
 import './Home.css'
+import Loading from './Loading.jsx'
 
 
 
@@ -121,7 +122,7 @@ export default function Home (){
               
 
         </div>        
-        <div className='cards' >
+       ( <div className='cards' >
 
         {
           currentRecipes?.map((c) => {
@@ -142,7 +143,8 @@ export default function Home (){
             ) 
           } )
         }           
-        </div> 
+        </div> ):
+        (<Loading/>)
         <div>
         <Paginado
         recipesPerPage={recipesPerPage}

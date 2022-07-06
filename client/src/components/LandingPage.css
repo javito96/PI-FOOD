@@ -1,22 +1,26 @@
 
   .LandingPage {
-    padding: 10rem 7rem;
+    padding: 15rem 7rem;
   background: url('https://img.freepik.com/foto-gratis/condimentos-preparar-pasta-italiana_1220-429.jpg?size=626&ext=jpg&ga=GA1.2.1327031495.1656964396');
-  height: 100vh;
-  image-resolution: 500px;
   width: 100vw;
+ 
   background-repeat: no-repeat; 
   background-size: cover;
+  }
+ h2{
+    font-size: 40px;
+    color: #fdc96e;   
+    align-items: center;   
   }
   .letras {
     display: left;     
     border-top-left-radius: 30px;
     justify-content: center;     
     align-items: center;    
-    height: 100vh;
+    height:10vh;
     font-family: 'Roboto', sans-serif;
     font-size: 70px;
-    color: #fda204;    
+    color: #ffdead;    
   }
   #button {
     background-color: #f4a927;

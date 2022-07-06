@@ -6,12 +6,17 @@ import "./LandingPage.css";
 export default function LandingPage(){
     return (
         <div className='LandingPage' >
+            <div>
+
             <Link to = '/home'>
                 <button className='button' id='button'>GET INTO</button>
             </Link>
-            <h1 className='letras' >WELCOME </h1>
+            </div>
             <div>
-            <h3>
+            <h1 className='letras' >WELCOME </h1>
+            </div>
+            <div className='descripcion'>
+            <h2>
               
               Don't know what to cook for your meal today?
                This page helps you search
@@ -20,9 +25,10 @@ export default function LandingPage(){
                  highest score and save 
                  your recipes.
               
-            </h3>
-
+            </h2>
             </div>
+            
+            
         </div>
     )
 }

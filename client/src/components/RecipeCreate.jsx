@@ -5,14 +5,20 @@ import { useDispatch, useSelector } from "react-redux";
 import './RecipeCreate.css'
 
 function validate(input) {
+    const imgValidate = /(https?:\/\/.*\.(?:png|jpg))/;
+        let testTitle = /^[A-Z][a-z][^$()!¡@#/=¿{}?*%&|<>#]*$/;
     let errors = {};
-    if (!input.title) {
+    if(!input.title) {
       errors.title = "Title is Required";
-    } else if (!input.summary) {
+
+    } else if (!testTitle.test(input.title)) {
+        errors.title = 'Start the title with capital letter. Only characters "":.,_- are accepted'
+    }
+    else if (!input.summary) {
       errors.summary = "Summary is Required";
-    } else if (!input.image) {
-      errors.image = "Image is Required";
-    } else if (!input.healthScore) {
+    }  else if (!input.image || !imgValidate.test(input.image)) {
+        errors.image = 'Please insert an image type URL'
+    }    else if (!input.healthScore) {
       errors.healthScore = "Health Score Number is Required";
     } else if (!input.spoonacularScore) {
       errors.spoonacularScore = "Spoonacular Score is Required";
@@ -60,7 +66,7 @@ export default function RecipeCreate() {
     }
 
     function handleSubmit(e) {
-        e.preventDefault();
+        e.preventDefault(); // evitamos volver a cargar la pagina evento por default
         console.log(input)
         dispatch(postRecipes(input));
         alert("Recipe created successfully!");
@@ -100,7 +106,7 @@ export default function RecipeCreate() {
             <h1 className="title">Create your recipe</h1>
 
                 </div>
-            <form onSubmit={(e) => handleSubmit(e)}>
+            <form className={errors && 'danger'} onSubmit={(e) => handleSubmit(e)}>
                 <div>
                     <label>Title</label>
                     <input
@@ -124,7 +130,7 @@ export default function RecipeCreate() {
                 </div>
 
                 <div>
-                    <label>Image</label>
+                    <label>Image(URL)</label>
                     <input
                         type='text'
                         value={input.image}
@@ -133,6 +139,8 @@ export default function RecipeCreate() {
                         />
                          {errors.image && <p>{errors.image}</p>}
                 </div>
+
+            
 
                 <div>
                     <label>Score</label>
@@ -181,7 +189,27 @@ export default function RecipeCreate() {
                         <option key={i} value={diet.title}>{diet.title}</option>
                         ))}
                 </select>
-                <ul><li>{input.diets.map(el => el + ', ')} </li></ul>
+
+
+
+
+                <ul><li
+                className="li"
+                >{input.diets.map(el => el + ', ')} </li></ul>
+
+                <div>
+            <button className="button" id="button" type="submit" >Create recipe</button>
+
+                </div>
+                      
+
+
+
+
+
+            
+            </form>
+            
             {input.diets.map(el=>
             <div>
                 <p>{el}</p>
@@ -189,16 +217,6 @@ export default function RecipeCreate() {
             </div>              
                         
                         )}
-                      
-
-
-            <button className="button" id="button" type="submit" >Create recipe</button>
-
-
-
-            
-            </form>
-            
             </div>
         </div>
     )
